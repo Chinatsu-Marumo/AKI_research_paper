@@ -13,10 +13,10 @@ jobs:
     - name: Set up TeX Live
       uses: xu-cheng/latex-action@v2
       with:
-        root_file: main.tex
+        root_file: background.tex
 
     - name: Compile LaTeX document
-      run: latexmk -pdf -interaction=nonstopmode main.tex
+      run: latexmk -pdf -interaction=nonstopmode background.tex
 
     - name: Move PDF to docs folder
       run: |
@@ -27,6 +27,6 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git add docs/main.pdf
+        git add docs/background.pdf
         git commit -m "Add compiled PDF"
         git push
