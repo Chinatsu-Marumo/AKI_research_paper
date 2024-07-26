@@ -18,8 +18,15 @@ jobs:
     - name: Compile LaTeX document
       run: latexmk -pdf -interaction=nonstopmode main.tex
 
-    - name: Upload PDF
-      uses: actions/upload-artifact@v2
-      with:
-        name: document
-        path: main.pdf
+    - name: Move PDF to docs folder
+      run: |
+        mkdir -p docs
+        mv background.pdf docs/
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git add docs/main.pdf
+        git commit -m "Add compiled PDF"
+        git push
