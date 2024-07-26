@@ -18,11 +18,17 @@ jobs:
     - name: Compile LaTeX document
       run: latexmk -pdf -interaction=nonstopmode background.tex
 
+    - name: List files in workspace
+      run: ls -la
+
     - name: Create docs folder
       run: mkdir -p docs
 
     - name: Move PDF to docs folder
       run: mv background.pdf docs/
+
+    - name: List files in docs folder
+      run: ls -la docs/
 
     - name: Commit and push changes
       env:
