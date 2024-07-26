@@ -10,7 +10,16 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
+    - name: Cache TeX Live
+      uses: actions/cache@v2
+      with:
+        path: /usr/local/texlive
+        key: ${{ runner.os }}-texlive-2023
+        restore-keys: |
+          ${{ runner.os }}-texlive
+
     - name: Install TeX Live and latexmk
+      if: steps.cache.outputs.cache-hit != 'true'
       run: |
         sudo apt-get update
         sudo apt-get install -y texlive-full latexmk
