@@ -45,6 +45,7 @@ jobs:
       run: |
         git config --global user.email "action@github.com"
         git config --global user.name "GitHub Action"
+        git remote set-url origin https://${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
         git add docs/background.pdf
         git commit -m "Add compiled PDF"
         git push origin HEAD:main
