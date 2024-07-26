@@ -18,12 +18,15 @@ jobs:
     - name: Compile LaTeX document
       run: latexmk -pdf -interaction=nonstopmode background.tex
 
+    - name: Create docs folder
+      run: mkdir -p docs
+
     - name: Move PDF to docs folder
-      run: |
-        mkdir -p docs
-        mv background.pdf docs/
+      run: mv background.pdf docs/
 
     - name: Commit and push changes
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
