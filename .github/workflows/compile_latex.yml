@@ -10,10 +10,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up TeX Live
-      uses: xu-cheng/latex-action@v2
-      with:
-        root_file: background.tex
+    - name: Install TeX Live and latexmk
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y texlive-full latexmk
 
     - name: Compile LaTeX document
       run: latexmk -pdf -interaction=nonstopmode background.tex
